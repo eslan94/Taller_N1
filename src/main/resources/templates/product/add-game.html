@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <title>Nuevo Videojuego</title>
+  <style>
+    body { background-color: #f4f7f6; }
+    .card { border: none; border-radius: 15px; }
+    .form-control:focus { box-shadow: none; border-color: #0d6efd; }
+    .input-group-text { background-color: #f8f9fa; border-right: none; }
+    .form-control { border-left: none; }
+  </style>
+</head>
+<body>
+
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+
+      <div class="text-center mb-4">
+        <h2 class="fw-bold text-dark">Añadir Nuevo Videojuego</h2>
+        <p class="text-muted">Completa la información para actualizar el catálogo</p>
+      </div>
+
+      <div class="card shadow-lg p-4">
+        <form th:action="@{/save-product}" th:object="${product}" method="post">
+
+          <div class="mb-3">
+            <label class="form-label fw-semibold">Nombre del Videojuego</label>
+            <div class="input-group">
+              <span class="input-group-text"><i class="fas fa-gamepad text-primary"></i></span>
+              <input type="text" th:field="*{name}" class="form-control" placeholder="Ej: Elden Ring" required>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label class="form-label fw-semibold">Categoría</label>
+              <div class="input-group">
+                <span class="input-group-text"><i class="fas fa-tags"></i></span>
+                <select th:field="*{category}" class="form-select" required style="border-left: none;">
+                  <option th:each="cat : ${categories}" th:value="${cat.id}" th:text="${cat.name}"></option>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-6 mb-3">
+              <label class="form-label fw-semibold">Precio</label>
+              <div class="input-group">
+                <span class="input-group-text"><i class="fas fa-dollar-sign text-success"></i></span>
+                <input type="number" step="0.01" th:field="*{precio}" class="form-control" placeholder="0.00" required>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label class="form-label fw-semibold">Stock Inicial</label>
+              <div class="input-group">
+                <span class="input-group-text"><i class="fas fa-cubes"></i></span>
+                <input type="number" th:field="*{stock}" class="form-control" placeholder="Unidades" required>
+              </div>
+            </div>
+            <div class="col-md-6 mb-3">
+              <label class="form-label fw-semibold">URL de la Portada</label>
+              <div class="input-group">
+                <span class="input-group-text"><i class="fas fa-link text-info"></i></span>
+                <input type="url" th:field="*{imagenUrl}" class="form-control" placeholder="https://..." required>
+              </div>
+            </div>
+          </div>
+
+          <div class="mb-4">
+            <label class="form-label fw-semibold">Descripción</label>
+            <textarea th:field="*{description}" class="form-control" rows="3" placeholder="Escribe una breve reseña del juego..." style="border-left: 1px solid #dee2e6;"></textarea>
+          </div>
+
+          <div class="d-grid gap-2">
+            <button type="submit" class="btn btn-primary btn-lg shadow-sm">
+              <i class="fas fa-save me-2"></i>Guardar Videojuego
+            </button>
+            <a th:href="@{/}" class="btn btn-light border">Cancelar</a>
+          </div>
+
+        </form>
+      </div>
+
+      <p class="text-center mt-4 small text-muted">Asegúrate de que la URL de la imagen termine en .jpg o .png para mejor visualización.</p>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

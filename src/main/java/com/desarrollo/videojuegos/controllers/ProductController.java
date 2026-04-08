@@ -37,14 +37,14 @@ public class ProductController {
         return "product/home";
     }
 
-    @GetMapping("/add-product")
+    @GetMapping("/add-game")
     public String getFormProduct(Model model){
         model.addAttribute("product", new Product());
         model.addAttribute("categories", categoryService.getAllCategories());
-        return "product/add-product";
+        return "product/add-game";
     }
 
-    @PostMapping("/add-product")
+    @PostMapping("/add-game")
     public String addProduct(@ModelAttribute Product product){
         productService.saveProduct(product);
         return "redirect:/";
@@ -55,7 +55,7 @@ public class ProductController {
         Product product = productService.getProductById(id).orElseThrow();
         model.addAttribute("product", product);
         model.addAttribute("categories", categoryService.getAllCategories());
-        return "product/add-product";
+        return "product/add-game";
     }
 
     @PostMapping("/product/edit/{id}")

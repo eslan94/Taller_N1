@@ -12,6 +12,7 @@ public class Product {
     private double precio;
     private int stock;
     private String description;
+    private String imagenUrl = "https://placehold.co/600x400?text=Videojuego";
 
     @ManyToOne
     @JoinColumn(name="category_id", nullable = false)
@@ -63,5 +64,13 @@ public class Product {
 
     public void setCategory(Category category) {
         this.category = category;
+    }
+
+    public String getImagenUrl() {
+        return imagenUrl;
+    }
+
+    public void setImagenUrl(String imagenUrl) {
+        this.imagenUrl = imagenUrl;
     }
 }
